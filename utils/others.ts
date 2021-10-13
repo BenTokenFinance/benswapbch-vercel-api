@@ -8,15 +8,6 @@ export const getBchPrice =  async () => {
             body += chunk;
         });
     
-        res.on("end", () => {
-            try {
-                body = JSON.parse(data);
-                // do something with JSON
-            } catch (error) {
-                
-            };
-        });
-    
     }).on("error", (error: any) => {
         
     });
