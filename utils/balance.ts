@@ -19,16 +19,16 @@ export const getTotalStaked = async (address: string, block: string): Promise<nu
   let balance = new BigNumber(0);
 
   try {
-    // GBEN balance in wallet.
+    // EBEN balance in wallet.
     const cakeContract = getContract(bep20ABI, CAKE, true);
     const cakeBalance = await cakeContract.methods.balanceOf(address).call(undefined, blockNumber);
     balance = balance.plus(cakeBalance);
   } catch (error) {
-    console.error(`GBEN balance error: ${error}`);
+    console.error(`EBEN balance error: ${error}`);
   }
 
   try {
-    // GBEN-BNB farm.
+    // EBEN-BNB farm.
     const masterContract = getContract(masterChefABI, MASTERCHEF_CONTRACT, true);
     const cakeBnbContract = getContract(pairABI, CAKE_BNB_FARM, true);
     const totalSupplyLP = await cakeBnbContract.methods.totalSupply().call(undefined, blockNumber);
@@ -48,10 +48,10 @@ export const getTotalStaked = async (address: string, block: string): Promise<nu
     );
     balance = balance.plus(new BigNumber(cakeLPBalance.toSignificant(18)).times(1e18));
   } catch (error) {
-    console.error(`GBEN-BNB LP error: ${error}`);
+    console.error(`EBEN-BNB LP error: ${error}`);
   }
 
-  // TODO: Add other GBEN pairs
+  // TODO: Add other EBEN pairs
 
   try {
     // MasterBreeder contract.
