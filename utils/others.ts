@@ -1,11 +1,9 @@
 const https = require('https');
 
-const url = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin-cash&vs_currencies=usd";
-
 export const getBchPrice =  async () => {
     let body = null;
 
-    await https.get(url, (res:any) => {
+    await https.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin-cash&vs_currencies=usd", (res:any) => {
         let data = "";
     
         res.on("data", (chunk:any) => {
@@ -13,16 +11,17 @@ export const getBchPrice =  async () => {
         });
     
         res.on("end", () => {
+            console.log(data);
             try {
                 body = JSON.parse(data);
                 // do something with JSON
             } catch (error) {
-                // do something?
+                console.log(error)
             };
         });
     
     }).on("error", (error: any) => {
-        // do something?
+        console.log(error)
     });
 
     return body;
