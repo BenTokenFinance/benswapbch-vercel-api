@@ -57,7 +57,7 @@ export const getTotalStaked = async (address: string, block: string): Promise<nu
     // MasterBreeder contract.
     const masterContract = getContract(masterChefABI, MASTERCHEF_CONTRACT, true);
     const cakeMainStaking: UserInfoResult = await masterContract.methods
-      .userInfo(7, address)
+      .userInfo(1, address)
       .call(undefined, blockNumber);
     balance = balance.plus(cakeMainStaking.amount);
   } catch (error) {
